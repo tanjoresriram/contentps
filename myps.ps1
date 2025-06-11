@@ -1,20 +1,22 @@
-# Replace with your NAS share path and desired drive letter.
-$nasDriveLetter = "Z"
-$nasSharePath = "\\nas-server\share-name\installer.exe"
+# This is a comment in the script
 
-# Map the NAS share to a local drive.
-New-PSDrive -Name $nasDriveLetter -PSProvider FileSystem -Root $nasSharePath -Persist -ErrorAction Stop
+# Get a list of all files in the current directory
+Get-ChildItem
 
-# Execute the installer.  Use -Wait to ensure the installation completes.
-# Add any necessary installation arguments.
-try {
-    Start-Process $nasDriveLetter:\installer.exe -Wait -ArgumentList "/silent /norestart"  # Example silent install
-}
-catch {
-    Write-Error "Installer failed: $($_.Exception.Message)"
-    # Optionally handle the failure (e.g., cleanup, logging)
-}
-finally {
-    # Remove the mapped drive after installation.
-    Remove-PSDrive -Name $nasDriveLetter -Force -ErrorAction SilentlyContinue
-}
+# Get the current date and time
+Get-Date
+
+# Print a message to the console
+Write-Host "Hello, world!"
+
+# Get the version of PowerShell you are using
+Get-Host | Select-Object PSVersion
+
+# Create a new file
+New-Item -Path "C:\temp\newfile.txt" -ItemType File -Force
+
+# Add some content to the new file
+Add-Content -Path "C:\temp\newfile.txt" -Value "This is some sample text."
+
+# Get the contents of the new file
+Get-Content -Path "C:\temp\newfile.txt"
